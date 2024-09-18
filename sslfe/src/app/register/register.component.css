@@ -1,0 +1,129 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+
+.container{
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+
+  &:after{
+      content: '';
+      position:fixed;
+      inset: 0;
+      background-color: #34AF6D;
+      width: 60%;
+      height: 100vh;
+      clip-path: polygon(0 100%, 0 0, 100% 0, 70% 100%);
+      z-index: -1;
+  }
+}
+
+.login-card {
+  background-color: #d8f3df;
+  border: 1px solid #ddd;
+  box-shadow: 0 10px 50px -30px black;
+  width: 700px;
+  border-radius: 30px;
+  overflow: visible;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  text-align: center;
+}
+
+.login-card a {
+  color: #34af6d;
+}
+
+.login-card .column {
+  padding: 4rem;
+}
+
+.login-card .column:last-child {
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+  position: relative;
+}
+
+.login-card .column:last-child::after {
+  content: "";
+  position: absolute;
+}
+
+.login-card .column * {
+  z-index: 1;
+}
+
+.login-card .column a {
+  display: inline-block;
+  padding: 12px 30px;
+  font-size: 16px;
+  border: 2px solid #34af6d;
+  color: black;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+
+.login-card .column a:hover {
+  background-color: #34af6d;
+  color: white;
+}
+
+.login-card h1 {
+  margin-bottom: 15px;
+}
+
+.login-card .form-group {
+  width: 100%;
+  max-height: 40%;
+  border: none;
+  background-color: #effaf3;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 50px;
+  transition: box-shadow 0.2s;
+}
+
+.login-card .form-group:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #34af6d;
+}
+
+.login-card form {
+  margin-top: 3rem;
+}
+
+.login-card form > * {
+  margin-top: 1rem;
+}
+
+.login-card form button {
+  background-color: #34af6d;
+  color: white;
+  border: none;
+  padding: 20px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  font-size: 18px;
+}
+
+.login-card form button:active {
+  transform: scale(0.95);
+  background-color: #2a8f54;
+}

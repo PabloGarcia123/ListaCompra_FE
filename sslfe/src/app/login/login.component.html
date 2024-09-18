@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="login-card">
+        <div class="column">
+            <h1>Login</h1>
+            <form>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Email" class="form-group" 
+                        [(ngModel)]="userData.email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Password" class="form-group" 
+                        [(ngModel)]="userData.password" required>
+                </div>
+                <div class="signup-text">
+                    Don't remember the password? <a href="/recoverPassword"> Recover password</a>
+                </div>
+                <div class="flex">
+                    <button type="submit"(click)="login()">Log In</button>
+                </div>
+            </form>
+        </div>
+        <div class="column">
+            <h2>Welcome to the shopping list</h2>
+            <h3>Choose what you want to buy</h3>
+            <div class="signup-text">
+                Don't have an account yet? <a href="/register"> Sign up</a>
+            </div>
+        </div>
+    </div>
+</div>
