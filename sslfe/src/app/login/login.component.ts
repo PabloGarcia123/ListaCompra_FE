@@ -16,15 +16,24 @@ export class LoginComponent {
   
   userData = {
     email: '',
-    password: ''
+    pwd: ''
   };
 
   login() {
 
-    this.userService.loginUser(this.userData).subscribe(
-      response => {
+    this.userService.loginUser1(this.userData).subscribe(
+      (response) => {
       console.log('Datos enviados con exito', response);
-      //this.router.navigate(['/home']);
+      localStorage.setItem('token', response);
+      this.router.navigate(['/home']);
+      },
+      (error) =>{
+        console.error('Error al enviar datos:', error);
+        if (error.status === 401) {
+          alert('Credenciales incorrectas.');
+        } else {
+          alert('Ocurrió un error al iniciar sesión.');
+        }
     });
   }
 

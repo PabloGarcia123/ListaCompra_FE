@@ -56,7 +56,7 @@ export class RegisterComponent {
       //Al menos una letra mayúscula
       || !/[A-Z]/.test(this.userData.pwd1)
       //Al menos un caracter especial
-      || !/[!@#\$%\^&]/.test(this.userData.pwd1)) {
+      || !/[!@#\$%\^&_]/.test(this.userData.pwd1)) {
       console.log('La contraseña debe tener al menos 8 caracteres, un número, una letra mayúscula y un caracter especial');
       this.mostrarLabelMensaje("La contraseña debe tener al menos 8 caracteres, un número, una letra mayúscula y un caracter especial");
       return;
@@ -67,14 +67,15 @@ export class RegisterComponent {
       this.mostrarLabelMensaje("Las contraseñas no coinciden");
       return;
     }
-    //El nombre solo puede contener letras
-    if (!/^[a-zA-Z]+$/.test(this.userData.nombre)) {
+    //El nombre solo puede contener letras y caracter en blanco
+    if (!/^[a-zA-Z\sáéíóúÁÉÍÓÚ]+$/.test(this.userData.nombre)) {
       console.log('El nombre solo puede contener letras');
       this.mostrarLabelMensaje("El nombre solo puede contener letras");
       return;
     }
-    //Los apellidos solo pueden contener letras
-    if (!/^[a-zA-Z]+$/.test(this.userData.apellidos)) {
+    
+    //Los apellidos solo pueden contener letras y caracter en blanco
+    if (!/^[a-zA-Z\sáéíóúÁÉÍÓÚ]+$/.test(this.userData.apellidos)) {
       console.log('Los apellidos solo pueden contener letras');
       this.mostrarLabelMensaje("Los apellidos solo pueden contener letras");
       return;
@@ -85,10 +86,10 @@ export class RegisterComponent {
       this.mostrarLabelMensaje("El DNI debe tener 8 números y una letra");
       return;
     }
-    //La fecha de nacimiento debe tener el formato dd/mm/yyyy
-    if (!/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/.test(this.userData.fechaNacimiento)) {
-      console.log('La fecha de nacimiento debe tener el formato dd/mm/yyyy');
-      this.mostrarLabelMensaje("La fecha de nacimiento debe tener el formato dd/mm/yyyy");
+    //La fecha de nacimiento debe tener el formato yyyy-mm-dd
+    if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(this.userData.fechaNacimiento)) {
+      console.log('La fecha de nacimiento debe tener el formato yyyy-mm-dd');
+      this.mostrarLabelMensaje("La fecha de nacimiento debe tener el formato yyyy-mm-dd");
       return;
     }
     //El teléfono debe tener 9 números

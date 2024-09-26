@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="home-card">
+        <!-- Sección de Cargar Listas -->
+        <div class="section cargar-listas" *ngIf="!creandoNuevaLista">
+            <h2>My Lists</h2>
+            <ul class="lista-items">
+                <li *ngFor="let lista of listas">
+                    <div class="lista-content">
+                        <!-- Mostrar inputs si la lista está en edición -->
+                        <div *ngIf="lista === listaEditando">
+                            <div class="edit-fields">
+                                <label class="edit-label" for="nombre">Nombre:</label>
+                                <input id="nombre" type="text" [(ngModel)]="lista.nombre" class="nombre-editable"
+                                    placeholder="Edit name" autofocus />
+                            </div>
+                            <div class="edit-fields">
+                                <label class="edit-label" for="descripcion">Descripción:</label>
+                                <input id="descripcion" type="text" [(ngModel)]="lista.descripcion"
+                                    class="descripcion-editable" placeholder="Edit description" />
+                            </div>
+                        </div>
+                        <!-- Mostrar nombre con tooltip si no está en edición -->
+                        <span *ngIf="lista !== listaEditando" class="lista-nombre"
+                            [attr.data-description]="lista.descripcion">
+                            {{ lista.nombre }}
+                        </span>
+                        <div class="actions">
+                            <button (click)="editarLista(lista)" title="Edit">
+                                <img src="../../assets/editar.png" alt="Edit" />
+                            </button>
+                            <button (click)="eliminarLista(lista)" title="Delete">
+                                <img src="../../assets/eliminar.png" alt="Delete" />
+                            </button>
+                            <button (click)="mostrarSeccionProductos(lista)" title="Add Product">
+                                <img src="../../assets/anadir.png" alt="Add Product" />
+                            </button>
+                            <button (click)="agregarMiembro(lista)" title="Add Member">
+                                <img src="../../assets/agregar-usuario.png" alt="Add Member" />
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <button (click)="crearNuevaLista()">Create new list</button>
+        </div>
+
+        <!-- Sección para crear una nueva lista -->
+        <div class="section nueva-lista" *ngIf="creandoNuevaLista">
+            <h2>Create a New List</h2>
+            <input type="text" placeholder="List Name" [(ngModel)]="nombreNuevaLista" />
+            <input type="text" placeholder="Description" [(ngModel)]="descripcionNuevaLista" />
+            <button (click)="guardarNuevaLista()">Save List</button>
+        </div>
+
+        <!-- Sección de Gestión de Productos: Solo mostrar si hay una lista seleccionada -->
+        <div class="section productos" *ngIf="listaSeleccionada && mostrarProductos">
+            <h2>Products on the List: {{ listaSeleccionada.nombre }}</h2>
+            <ul class="producto-items">
+                <li *ngFor="let producto of listaSeleccionada.productos">
+                    <span>{{ producto.nombre }} - {{ producto.cantidad }}</span>
+                    <div class="actions">
+                        <button (click)="editarProducto(producto)" title="Edit">
+                            <img src="../../assets/editar.png" alt="Edit" />
+                        </button>
+                        <button (click)="eliminarProducto(producto)" title="Delete">
+                            <img src="../../assets/eliminar.png" alt="Delete" />
+                        </button>
+                    </div>
+                </li>
+            </ul>
+            <input type="text" placeholder="Product Name" [(ngModel)]="nuevoProducto.nombre" />
+            <input type="number" placeholder="Quantity" [(ngModel)]="nuevoProducto.cantidad" />
+            <button (click)="agregarProducto()">Add Product</button>
+        </div>
+    </div>
+</div>
