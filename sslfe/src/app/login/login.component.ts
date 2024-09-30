@@ -25,6 +25,7 @@ export class LoginComponent {
       (response) => {
       console.log('Datos enviados con exito', response);
       localStorage.setItem('token', response);
+      
       this.router.navigate(['/home']);
       },
       (error) =>{

@@ -19,7 +19,7 @@ export class RecoverPasswordComponent {
     pwd: ''
   };
 
-  onPulse() {
+  recoverPassword() {
     this.userService.recoverPassword(this.userData).subscribe(
       response => {
         if(response){

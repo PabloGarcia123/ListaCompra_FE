@@ -1,7 +1,7 @@
 import { ApplicationModule, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from './user';
 import { Observable } from 'rxjs';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,7 @@ export class UserService {
   private apiUrl = 'http://localhost:9000'
   constructor(private httpService:HttpClient) { }
 
-  registerUser1(user: any){
-    
+  registerUser1(user: any) {
     const url = `${this.apiUrl}/users/registrar1`;
     console.log(user);
     return this.httpService.post<any>(url, user);
@@ -65,5 +64,7 @@ export class UserService {
   confirmAccount(){
 
   }
+
+ 
 
 }
