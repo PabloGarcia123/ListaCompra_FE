@@ -10,61 +10,48 @@ export class UserService {
 
   //private apiUrl = 'https://alarcos.esi.uclm.es/fakeAccountsBE'
   private apiUrl = 'http://localhost:9000'
-  constructor(private httpService:HttpClient) { }
+  constructor(private httpService: HttpClient) { }
 
   registerUser1(user: any) {
     const url = `${this.apiUrl}/users/registrar1`;
-    console.log(user);
+    //console.log(user);
     return this.httpService.post<any>(url, user);
-  }
-
-  registerUser2(){
-
   }
 
   loginUser1(user: any): Observable<string> {
     const url = `${this.apiUrl}/users/login1`;
-    console.log(user);
-    // Configura la solicitud para que espere una respuesta de tipo texto
+    //console.log(user);
     return this.httpService.put<string>(url, user, { responseType: 'text' as 'json' });
   }
-  
 
-  loginUser2(){
-
+  obtenerUsuarioPorToken(token: string): Observable<any> {
+    //console.log('Token:', token);
+    const url = `${this.apiUrl}/users/getListsByUser?token=${token}`;
+    return this.httpService.get<any>(url);
   }
 
-  loginUser3(){
-  
-  }
-
-  getAllUsers(){
-
-  }
-
-  deleteUser(){
-
-  }
-
-  deleteAllUsers(){
-
+  validarEmail(email: string) {
+    const url = `${this.apiUrl}/users/validateEmail`;
+    return this.httpService.post<boolean>(url, { email });
   }
   
-  recoverPassword(user: any){
+
+  recoverPassword(user: any) {
     const url = `${this.apiUrl}/users/recoverPassword`;
-    console.log(user);
+    //console.log(user);
     return this.httpService.post<any>(url, user);
   }
 
 
-  changePassword(){
-
+  changePassword(token: string, newPassword: string) {
+    const payload = { token, newPassword };
+    //console.log(payload);  // Deberías ver solo la cadena del token aquí
+    return this.httpService.post<any>(`${this.apiUrl}/users/changePassword`, payload);
   }
 
-  confirmAccount(){
-
+  establecerPremium(email: string) {
+    const url = `${this.apiUrl}/users/setPremium`;
+    return this.httpService.post<any>(url, email );
   }
-
- 
-
+  
 }

@@ -13,6 +13,7 @@
   justify-content: center;
   min-height: 100vh;
   padding: 1.5rem;
+  position: relative;
 }
 
 .container::after {
@@ -30,11 +31,12 @@
   background-color: #d8f3df;
   border: 1px solid #ddd;
   box-shadow: 0 10px 50px -30px black;
-  width: 1200px;
+  width: 1000px;
   border-radius: 30px;
   overflow: visible;
   display: grid;
   grid-template-columns: auto auto;
+  position: relative; /* Para permitir el posicionamiento absoluto del avatar */
 }
 
 .home-card .section {
@@ -120,7 +122,7 @@ input:focus {
 .lista-content {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Asegura que el contenido se distribuya entre ambos extremos */
+  justify-content: space-between;
   gap: 10px;
   width: 100%;
 }
@@ -193,27 +195,194 @@ input:focus {
     flex-direction: column;
     gap: 1rem;
   }
-/* Añade estas reglas CSS para alinear los labels a la izquierda de los inputs */
-.edit-fields {
+
+  .edit-fields {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .edit-label {
+    min-width: 100px;
+    text-align: right;
+    font-weight: bold;
+  }
+
+  .nombre-editable,
+  .descripcion-editable {
+    flex: 1;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #34af6d;
+  }
+}
+
+/* Encabezado con el avatar */
+.home-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px; /* Espacio entre label e input */
-  width: 100%; /* Espacio entre cada línea de nombre y descripción */
+  padding: 20px;
+  background-color: #34af6d;
+  color: white;
 }
 
-.edit-label {
-  min-width: 100px; /* Ajusta el ancho mínimo para alinear correctamente */
-  text-align: right; /* Alinea el texto del label a la derecha */
-  font-weight: bold; /* Resalta los labels */
+.user-avatar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
 }
 
-.nombre-editable,
-.descripcion-editable {
-  flex: 1; /* Deja que el input ocupe el espacio restante */
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: 1px solid #34af6d;
+.user-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: transform 0.2s;
 }
 
+.user-avatar img:hover {
+  transform: scale(1.1);
+}
+/* Panel lateral de usuario */
+.user-panel {
+  background-color: #effaf3;
+  position: absolute; /* Cambiado de fixed a absolute */
+  right: 20px; /* Oculto inicialmente */
+  top: 70px; /* Ajusta la posición para que no toque la parte superior */
+  width: 300px;
+  padding: 20px;
+  box-shadow: -3px 0 15px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  border-radius: 10px;
+  height: auto; /* La altura será automática según el contenido */
+}
+
+.user-panel.open {
+  right: 20px; /* Muestra el panel */
+}
+
+.user-options {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.user-options li {
+  padding: 10px 0;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.user-options li:hover {
+  background-color: #d8f3df;
+  padding-left: 10px;
+  transition: all 0.2s;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  float: right;
+}
+
+
+
+.miembro-items {
+  list-style: none;
+  padding: 0;
+}
+
+.miembro-items li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #effaf3;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: box-shadow 0.2s;
+}
+
+.miembro-items li:hover {
+  box-shadow: 0 0 0 2px #34af6d;
+}
+
+.invitacion {
+  margin: 20px 0;
+}
+
+.invitacion input[type="email"] {
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 50px;
+  background-color: #effaf3;
+  transition: box-shadow 0.2s;
+}
+
+.invitacion input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #34af6d;
+}
+/* Estilo para los botones deshabilitados */
+.disabled-button {
+  opacity: 0.3; /* Hacer el botón más transparente */
+  cursor: not-allowed; /* Mostrar el cursor como no permitido */
+  pointer-events: none; /* Deshabilitar completamente la interacción del usuario */
+}
+
+.disabled-button img {
+  opacity: 0.3; /* Aplicar transparencia también a las imágenes dentro del botón */
+}
+
+/* Opcional: Estilo general para cuando el botón está deshabilitado (disabled) */
+button[disabled] {
+  background-color: transparent; /* Puede ser transparente o gris tenue */
+  border: none; /* Eliminar el borde para hacerlo más tenue */
+}
+.icon {
+  width: 24px;  /* Ajusta al tamaño deseado */
+  height: 24px; /* Ajusta al tamaño deseado */
+  margin-right: 10px; /* Espaciado a la derecha del icono */
+  object-fit: cover; /* Mantener la proporción y cubrir el área */
+}
+
+
+.miembros button {
   
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
 }
+
+.actions {
+  display: flex;
+  gap: 5px;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.actions img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s;
+}
+
+.actions img:hover {
+  transform: scale(1.1);
+}
+

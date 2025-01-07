@@ -20,15 +20,20 @@ export class RecoverPasswordComponent {
   };
 
   recoverPassword() {
-    this.userService.recoverPassword(this.userData).subscribe(
-      response => {
-        if(response){
-          window.alert('Password recovered successfully');
+    if (this.userData.email) {
+      this.userService.recoverPassword(this.userData).subscribe(
+        response => {
+          if (response) {
+            window.alert('Password recovery email sent successfully');
+          }
+        },
+        error => {
+          window.alert('Error sending password recovery email');
         }
-      },
-      error => {
-        window.alert('Error recovering password');
-      }
-    );
+      );
+    } else {
+      window.alert('Please enter a valid email address');
+    }
   }
+  
 }

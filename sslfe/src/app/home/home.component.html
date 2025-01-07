@@ -1,97 +1,177 @@
 <div class="container">
-    <div class="home-card">
-      <!-- Sección de Cargar Listas -->
-      <div class="section cargar-listas" *ngIf="!creandoNuevaLista">
-        <h2>My Lists</h2>
-        <ul class="lista-items">
-          <li *ngFor="let lista of listas">
-            <div class="lista-content">
-              <!-- Mostrar inputs si la lista está en edición -->
-              <div *ngIf="lista === listaEditando">
-                <div class="edit-fields">
-                  <label class="edit-label" for="nombre">Nombre:</label>
-                  <input id="nombre" type="text" [(ngModel)]="lista.nombre" class="nombre-editable" placeholder="Edit name" autofocus />
-                </div>
-                <div class="edit-fields">
-                  <label class="edit-label" for="descripcion">Descripción:</label>
-                  <input id="descripcion" type="text" [(ngModel)]="lista.descripcion" class="descripcion-editable" placeholder="Edit description" />
-                </div>
-              </div>
-  
-              <!-- Mostrar nombre con tooltip si no está en edición -->
-              <span *ngIf="lista !== listaEditando" class="lista-nombre" [attr.data-description]="lista.descripcion">
-                {{ lista.nombre }}
-              </span>
-  
-              <div class="actions">
-                <button (click)="editarLista(lista)" title="Edit List">
-                  <img src="../../assets/editar.png" alt="Edit Lista" />
-                </button>
-                <button (click)="eliminarLista(lista)" title="Delete List">
-                  <img src="../../assets/eliminar.png" alt="Delete List" />
-                </button>
-                <button (click)="mostrarSeccionProductos(lista)" title="Add Product">
-                  <img src="../../assets/anadir.png" alt="Add Product" />
-                </button>
-                <button (click)="agregarMiembro(lista)" title="Add Member">
-                  <img src="../../assets/agregar-usuario.png" alt="Add Member" />
-                </button>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <button (click)="crearNuevaLista()">Create new list</button>
-      </div>
-  
-      <!-- Sección para crear una nueva lista -->
-      <div class="section nueva-lista" *ngIf="creandoNuevaLista">
-        <h2>Create a New List</h2>
-        <input type="text" placeholder="List Name" [(ngModel)]="nombreNuevaLista" />
-        <input type="text" placeholder="Description" [(ngModel)]="descripcionNuevaLista" />
-        <button (click)="guardarNuevaLista()">Save List</button>
-      </div>
-  
-      <!-- Sección de Gestión de Productos: Solo mostrar si hay una lista seleccionada -->
-      <div class="section productos" *ngIf="listaSeleccionada && mostrarProductos">
-  
-        <h2>Products on the List: {{ listaSeleccionada.nombre }}</h2>
-        <ul class="producto-items">
-          <li *ngFor="let producto of listaSeleccionada.productos">
-            <!-- Mostrar inputs si el producto está en edición -->
-            <div *ngIf="producto === productoSeleccionado">
+  <div class="home-card">
+    <!-- Sección principal para cargar listas -->
+    <div class="section cargar-listas" *ngIf="!creandoNuevaLista">
+      <h2>My Lists</h2>
+      <ul class="lista-items">
+        <!-- Cargar listasPropietario -->
+        <li *ngFor="let lista of listasPropietario">
+          <div class="lista-content">
+            <!-- Mostrar inputs si la lista está en edición -->
+            <div *ngIf="lista === listaEditando">
               <div class="edit-fields">
-                <label class="edit-label" for="producto-nombre">Product Name:</label>
-                <input id="producto-nombre" type="text" [(ngModel)]="producto.nombre" class="nombre-editable" placeholder="Edit product name" />
+                <label class="edit-label" for="nombre">Nombre:</label>
+                <input id="nombre" type="text" [(ngModel)]="lista.nombre" class="nombre-editable"
+                  placeholder="Edit name" autofocus />
               </div>
               <div class="edit-fields">
-                <label class="edit-label" for="producto-cantidad">Quantity:</label>
-                <input id="producto-cantidad" type="number" [(ngModel)]="producto.cantidad" class="cantidad-editable" placeholder="Edit quantity" />
+                <label class="edit-label" for="descripcion">Descripción:</label>
+                <input id="descripcion" type="text" [(ngModel)]="lista.descripcion" class="descripcion-editable"
+                  placeholder="Edit description" />
               </div>
             </div>
-  
-            <!-- Mostrar nombre del producto y cantidad si no está en edición -->
-            <span *ngIf="producto !== productoSeleccionado">{{ producto.nombre }} :: {{ producto.cantidad }}</span>
-  
-            <!-- Botones de modificar y eliminar para cada producto -->
+
+            <!-- Mostrar nombre con tooltip si no está en edición -->
+            <span *ngIf="lista !== listaEditando" class="lista-nombre" [attr.data-description]="lista.descripcion">
+              {{ lista.nombre }}
+            </span>
+
             <div class="actions">
-              <button (click)="seleccionarProducto(producto)" *ngIf="producto !== productoSeleccionado" title="Edit">
-                <img src="../../assets/editar.png" alt="Edit" />
+              <button (click)="editarLista(lista)" title="Edit List">
+                <img src="../../assets/editar.png" alt="Edit List" />
               </button>
-              <button (click)="modificarProducto(producto)" *ngIf="producto === productoSeleccionado" title="Edit">
-                <img src="../../assets/editar.png" alt="Edit" />
+              <button (click)="eliminarLista(lista)" title="Delete List">
+                <img src="../../assets/eliminar.png" alt="Delete List" />
               </button>
-              <button (click)="eliminarProducto(producto)" title="Delete">
-                <img src="../../assets/eliminar.png" alt="Delete" />
+              <button (click)="mostrarSeccionProductos(lista)" title="Add Product">
+                <img src="../../assets/anadir.png" alt="Add Product" />
+              </button>
+              <button (click)="mostrarSeccionMiembros(lista)" title="Add Member">
+                <img src="../../assets/agregar-usuario.png" alt="Add Member" />
               </button>
             </div>
-          </li>
-        </ul>
-  
-        <!-- Campos para agregar nuevo producto -->
-        <input type="text" placeholder="Product Name" [(ngModel)]="nuevoProducto.nombre" />
-        <input type="number" placeholder="Quantity" [(ngModel)]="nuevoProducto.cantidad" />
-        <button (click)="agregarProducto()">Add Product</button>
+          </div>
+        </li>
+
+        <!-- Cargar listasMiembro debajo de listasPropietario -->
+        <li *ngFor="let lista of listasMiembro">
+          <div class="lista-content">
+            <span class="lista-nombre" [attr.data-description]="lista.descripcion">
+              {{ lista.nombre }}
+            </span>
+
+            <div class="actions">
+              <button disabled title="You can't edit this list" class="disabled-button">
+                <img src="../../assets/editar.png" alt="Edit Disabled" />
+              </button>
+              <button (click)="dejarDeSerMiembro(lista)" title="Unsuscribe list">
+                <img src="../../assets/eliminar.png" alt="Unsuscribe list" />
+              </button>
+              <button (click)="mostrarSeccionProductos(lista)" title="Add Product">
+                <img src="../../assets/anadir.png" alt="Add Product" />
+              </button>
+              <button (click)="mostrarSeccionMiembros(lista)" class="disabled-button">
+                <img src="../../assets/agregar-usuario.png" alt="Edit Disabled" />
+              </button>
+
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <button (click)="crearNuevaLista()">Create new list</button>
+    </div>
+
+    <!-- Sección para crear una nueva lista -->
+    <div class="section nueva-lista" *ngIf="creandoNuevaLista">
+      <h2>Create a New List</h2>
+      <input type="text" placeholder="List Name" [(ngModel)]="nombreNuevaLista" />
+      <input type="text" placeholder="Description" [(ngModel)]="descripcionNuevaLista" />
+      <button (click)="guardarNuevaLista()">Save List</button>
+    </div>
+
+    <!-- Sección de Gestión de Miembros: Solo mostrar si hay una lista seleccionada -->
+    <div class="section miembros" *ngIf="listaSeleccionada && mostrarMiembros">
+      <h2>Members of the List: {{ listaSeleccionada.nombre }}</h2>
+      <ul class="miembro-items">
+        <li *ngFor="let miembro of listaSeleccionada.miembros">
+          <span>{{ miembro.email }}</span>
+          <div class="actions">
+            <button (click)="eliminarMiembro(miembro)" title="Remove Member">
+              <img src="../../assets/eliminar.png" alt="Remove Member" />
+            </button>
+          </div>
+        </li>
+      </ul>
+
+      <div class="invitacion">
+        <h3>Invite a Member:</h3>
+        <input type="email" [(ngModel)]="emailInvitacion" placeholder="Enter user's email" />
       </div>
+
+      <button (click)="generarInvitacion()">Generate Invitation Link</button>
+    </div>
+
+    <!-- Sección de Gestión de Productos: Solo mostrar si hay una lista seleccionada -->
+    <div class="section productos" *ngIf="listaSeleccionada && mostrarProductos">
+      <h2>Products on the List: {{ listaSeleccionada.nombre }}</h2>
+      <ul class="producto-items">
+        <li *ngFor="let producto of listaSeleccionada.productos">
+          <!-- Mostrar inputs si el producto está en edición -->
+          <div *ngIf="producto === productoSeleccionado">
+            <div class="edit-fields">
+              <label class="edit-label" for="producto-nombre">Product Name:</label>
+              <input id="producto-nombre" type="text" [(ngModel)]="producto.nombre" class="nombre-editable"
+                placeholder="Edit product name" />
+            </div>
+            <div class="edit-fields">
+              <label class="edit-label" for="producto-cantidad">Quantity:</label>
+              <input id="producto-cantidad" type="number" [(ngModel)]="producto.cantidad" class="cantidad-editable"
+                placeholder="Edit quantity" />
+            </div>
+          </div>
+
+          <!-- Mostrar nombre del producto y cantidad si no está en edición -->
+          <span *ngIf="producto !== productoSeleccionado">{{ producto.nombre }} :: {{ producto.cantidad }}</span>
+
+          <!-- Botones de modificar y eliminar para cada producto -->
+          <div class="actions">
+            <button (click)="seleccionarProducto(producto)" *ngIf="producto !== productoSeleccionado" title="Edit">
+              <img src="../../assets/editar.png" alt="Edit Product" />
+            </button>
+            <button (click)="modificarProducto(producto)" *ngIf="producto === productoSeleccionado" title="Modify">
+              <img src="../../assets/editar.png" alt="Modify" />
+            </button>
+            <button (click)="eliminarProducto(producto)" title="Delete">
+              <img src="../../assets/eliminar.png" alt="Delete" />
+            </button>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Campos para agregar nuevo producto -->
+      <input type="text" placeholder="Product Name" [(ngModel)]="nuevoProducto.nombre" />
+      <input type="number" placeholder="Quantity" [(ngModel)]="nuevoProducto.cantidad" />
+      <button (click)="agregarProducto()">Add Product</button>
+    </div>
+
+    <!-- Avatar del usuario, que al hacer clic abre el panel lateral -->
+    <div class="user-avatar" (click)="toggleUserPanel()">
+      <img src="../../assets/usuario.png" alt="User Avatar">
+    </div>
+
+    <!-- Panel lateral del usuario, con comportamiento de ocultar/mostrar completo -->
+    <div class="user-panel" *ngIf="userPanelOpen">
+      <ul class="user-options">
+        <li (click)="irListas()">
+          <img src="../../assets/pagina-principal.png" alt="Listas" class="icon" />
+          Listas
+        </li>
+        <li (click)="irNotificaciones()">
+          <img src="../../assets/notificacion.png" alt="Notificaciones" class="icon" />
+          Notificaciones
+        </li>
+
+        <li (click)="irMiPlan()">
+          <img src="../../assets/suscripcion.png" alt="Mi Plan" class="icon" />
+          Mi Plan
+        </li>
+        <hr>
+        <li (click)="cerrarSesion()">
+          <img src="../../assets/cerrar-sesion.png" alt="Cerrar Sesión" class="icon" />
+          Cerrar Sesión
+        </li>
+      </ul>
     </div>
   </div>
-  
+</div>

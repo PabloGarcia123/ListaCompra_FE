@@ -108,8 +108,9 @@ export class RegisterComponent {
       (error) => {
         console.error('Error al enviar los datos del registro', error);
         console.log(this.userData);
-        if (error.status === 409) {
-          this.mostrarLabelMensaje("El usuario ya está registrado");
+        if (error.status === 403) {
+          window.alert('User already exists');
+          this.mostrarLabelMensaje("User already exists");
         }
       }
     );

@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="home-card">
+      <div class="section">
+        <h2>Selecciona tu plan</h2>
+        <div class="pricing-container">
+          <div class="plan-column free-plan">
+            <h3>Gratis</h3>
+            <p class="price">$0 <span>EUR/año</span></p>
+            <p>Con el plan gratuito, puedes:</p>
+            <ul>
+              <li>✓ Crear hasta 2 listas de la compra</li>
+              <li>✓ Cada lista puede tener un máximo de 10 productos</li>
+              <li>✓ Compartir cada lista con 1 persona</li>
+            </ul>
+            <button class="accept-button" (click)="seguirConPlanGratis()">Seguir con el plan Gratuito</button>
+          </div>
+  
+          <div class="plan-column plus-plan">
+            <h3>Plus</h3>
+            <p class="price">€3 <span>EUR/año</span></p>
+            <p>Con el plan Plus, obtienes:</p>
+            <ul>
+              <li>✓ Crear tantas listas como desees</li>
+              <li>✓ Añadir todos los productos que quieras</li>
+              <li>✓ Compartir tus listas con las personas que quieras</li>
+            </ul>
+            <button class="upgrade-button" (click)="mejorarPlan()">Mejora tu plan a Plus</button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Avatar del usuario -->
+      <div class="user-avatar" (click)="toggleUserPanel()">
+        <img src="../../assets/usuario.png" alt="User Avatar">
+      </div>
+  
+      <!-- Panel lateral del usuario -->
+      <div class="user-panel" *ngIf="userPanelOpen">
+        <ul class="user-options">
+          <li (click)="irListas()">
+            <img src="../../assets/pagina-principal.png" alt="Notificaciones" class="icon" />
+            Listas
+          </li>
+          <li (click)="irNotificaciones()">
+            <img src="../../assets/notificacion.png" alt="Notificaciones" class="icon" />
+            Notificaciones
+          </li>
+          <li (click)="irMiPlan()">
+            <img src="../../assets/suscripcion.png" alt="Mi Plan" class="icon" />
+            Mi Plan
+          </li>
+          <hr>
+          <li (click)="cerrarSesion()">
+            <img src="../../assets/cerrar-sesion.png" alt="Cerrar Sesión" class="icon" />
+            Cerrar Sesión
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

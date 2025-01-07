@@ -1,0 +1,168 @@
+.container {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+  position: relative;
+}
+
+.container::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-color: #34af6d;
+  width: 60%;
+  height: 100vh;
+  clip-path: polygon(0 100%, 0 0, 100% 0, 70% 100%);
+  z-index: -1;
+}
+
+.home-card {
+  background-color: #d8f3df;
+  border: 1px solid #ddd;
+  box-shadow: 0 10px 50px -30px black;
+  width: 1000px;
+  border-radius: 30px;
+  overflow: visible;
+  display: flex;
+  flex-direction: column; /* Cambiado a flex-direction para mayor control */
+  position: relative;
+}
+
+.home-card .section {
+  padding: 4rem;
+}
+
+.home-card h2 {
+  margin-bottom: 15px;
+  font-weight: 700; /* Hacer el encabezado más destacado */
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.lista-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background-color: #effaf3;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer; /* Cambiar el cursor para indicar que se puede hacer clic */
+}
+
+.lista-item:hover {
+  box-shadow: 0 0 10px #34af6d;
+  transform: translateY(-2px); /* Efecto de elevación */
+}
+
+.lista-content {
+  display: flex;
+  flex-direction: column; /* Cambiado a columna para mejor lectura */
+}
+
+.lista-nombre {
+  font-weight: 600; /* Resaltar el nombre de la lista */
+}
+
+.owner-email {
+  color: #555; /* Hacer el email menos destacado */
+  font-size: 14px; /* Tamaño de fuente más pequeño */
+}
+
+.actions {
+  display: flex;
+  gap: 10px; /* Espacio entre botones */
+}
+
+.accept-button, .reject-button {
+  background-color: #34af6d; /* Color de fondo del botón */
+  color: white; /* Color de texto */
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.accept-button:hover {
+  background-color: #2e9a5e; /* Color al pasar el ratón */
+}
+
+.reject-button {
+  background-color: #e74c3c; /* Color de fondo del botón de rechazar */
+}
+
+.reject-button:hover {
+  background-color: #c0392b; /* Color al pasar el ratón para rechazar */
+}
+
+.user-avatar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.user-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.user-avatar img:hover {
+  transform: scale(1.1);
+}
+
+  /* Panel lateral de usuario */
+  .user-panel {
+    background-color: #effaf3;
+    position: absolute; 
+    right: 20px; 
+    top: 70px; 
+    width: 300px;
+    padding: 20px;
+    box-shadow: -3px 0 15px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    border-radius: 10px;
+  }
+  
+  .user-options {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  .user-options li {
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .user-options li:hover {
+    background-color: #d8f3df;
+    padding-left: 10px;
+    transition: all 0.2s;
+  }
+  
+  .icon {
+    width: 24px;  /* Ajusta al tamaño deseado */
+    height: 24px; /* Ajusta al tamaño deseado */
+    margin-right: 10px; /* Espaciado a la derecha del icono */
+    object-fit: cover; /* Mantener la proporción y cubrir el área */
+  }
+
